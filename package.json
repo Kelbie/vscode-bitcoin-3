@@ -1,0 +1,151 @@
+{
+	"name": "vscode-bitcoin",
+	"description": "",
+	"author": "Kevin Kelbie <kevin@kelbie.me> (https://kelbie.me/)",
+	"license": "MIT",
+	"version": "0.0.0",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/KevinKelbie/vscode-bitcoin"
+	},
+	"publisher": "Bitcoin",
+	"categories": [
+		"Snippets"
+	],
+	"keywords": [
+		"bitcoin",
+		"miniscript",
+		"vscode"
+	],
+	"engines": {
+		"vscode": "^1.33.0"
+	},
+	"activationEvents": [
+		"onCommand:extension.helloWorld",
+		"onCommand:miniscript.preview",
+		"onLanguage:btc",
+		"onLanguage:miniscript",
+		"onLanguage:miniscript.policy"
+	],
+	"main": "./client/out/extension",
+	"contributes": {
+		"commands": [
+			{
+				"command": "extension.helloWorld",
+				"title": "Miniscript: Export to Bitcoin Script"
+			},
+			{
+				"command": "miniscript.preview",
+				"title": "Miniscript: Preview"
+			},
+			{
+				"command": "catCoding.start",
+				"title": "Start new cat coding session",
+				"category": "Cat Coding"
+			},
+			{
+				"command": "extension.addConsoleLog",
+				"title": "Add Console Log"
+			}
+		],
+		"snippets": [
+			{
+				"language": "btc",
+				"path": "./snippets/snippets.json"
+			},
+			{
+				"language": "miniscript",
+				"path": "./snippets/miniscript.snippets.json"
+			},
+			{
+				"language": "miniscript.policy",
+				"path": "./snippets/miniscript.policy.snippets.json"
+			}
+		],
+		"languages": [
+			{
+				"id": "btc",
+				"aliases": [
+					"btc"
+				],
+				"extensions": [
+					"btc"
+				],
+				"configuration": "./language-configuration.json"
+			},
+			{
+				"id": "miniscript",
+				"aliases": [
+					"miniscript"
+				],
+				"extensions": [
+					"miniscript"
+				],
+				"configuration": "./miniscript.language-configuration.json"
+			},
+			{
+				"id": "miniscript.policy",
+				"aliases": [
+					"miniscript.policy"
+				],
+				"extensions": [
+					"policy.miniscript"
+				],
+				"configuration": "./miniscript.policy.language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "btc",
+				"scopeName": "source.btc",
+				"path": "./syntaxes/btc.tmLanguage.json"
+			},
+			{
+				"language": "miniscript",
+				"scopeName": "source.miniscript",
+				"path": "./syntaxes/miniscript.tmLanguage.json"
+			},
+			{
+				"language": "miniscript.policy",
+				"scopeName": "source.policy.miniscript",
+				"path": "./syntaxes/miniscript.policy.tmLanguage.json"
+			}
+		],
+		"configuration": {
+			"type": "object",
+			"title": "Example configuration",
+			"properties": {
+				"languageServerExample.maxNumberOfProblems": {
+					"scope": "resource",
+					"type": "number",
+					"default": 100,
+					"description": "Controls the maximum number of problems produced by the server."
+				},
+				"languageServerExample.trace.server": {
+					"scope": "window",
+					"type": "string",
+					"enum": [
+						"off",
+						"messages",
+						"verbose"
+					],
+					"default": "off",
+					"description": "Traces the communication between VS Code and the language server."
+				}
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "cd client && npm run update-vscode && cd .. && npm run compile",
+		"compile": "tsc -b",
+		"watch": "tsc -b -w",
+		"postinstall": "cd client && npm install && cd ../server && npm install && cd ..",
+		"test": "sh ./scripts/e2e.sh"
+	},
+	"devDependencies": {
+		"@types/mocha": "^5.2.0",
+		"@types/node": "^8.0.0",
+		"tslint": "^5.16.0",
+		"typescript": "^3.5.1"
+	}
+}

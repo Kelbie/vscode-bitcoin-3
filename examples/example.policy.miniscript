@@ -1,0 +1,13 @@
+or(
+    pk(key_revocation),
+    and(
+        pk(key_remote),
+        or(
+            and(
+                pk(key_local),
+                hash160(H)
+            ),
+            older(1008)
+        )
+    )  
+)
